@@ -27,6 +27,27 @@ tools {
                  deploy adapters: [tomcat8(credentialsId: 'tomcat_credentials', path: '', url: 'http://13.233.99.175:8181/')], contextPath: 'pipelineSpring4', war: '**/target/*.war'
                    }
                 }    
+	stage ('success'){
+            steps {
+                script {
+                    currentBuild.result = 'SUCCESS'
+                }
+            }
+	}
+    post {
+        failure {
+            script {
+                currentBuild.result = 'FAILURE'
+            }
+        }
+
+	}
+        always {
+            step([$class: 'Mailer',
+                notifyEveryUnstableBuild: true,
+                recipients: "abilashsr1991@gmail.com",
+                sendToIndividuals: true])
+        }
        
    }
    
