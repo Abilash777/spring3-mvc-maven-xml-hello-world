@@ -42,12 +42,14 @@ tools {
         }
 
 	}
-        always {
+	stage ('mailer'){
+            step {
             step([$class: 'Mailer',
                 notifyEveryUnstableBuild: true,
                 recipients: "abilashsr1991@gmail.com",
                 sendToIndividuals: true])
         }
+     }
        
    }
    
