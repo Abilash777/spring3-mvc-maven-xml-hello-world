@@ -34,8 +34,8 @@ tools {
                 }
             }
 	}
-    post {
-        failure {
+    stage ('failure'){
+        steps {
             script {
                 currentBuild.result = 'FAILURE'
             }
